@@ -1,21 +1,22 @@
 package com.lab2;
 
-import java.util.Objects;
+import java.text.DecimalFormat;
 
 public class Furniture {
 
-  private float cost;
+  private final DecimalFormat decimalFormat = new DecimalFormat("#.###");
+  private float price;
   private int prodYear;
   private String name;
   private String country;
 
-  public Furniture(float cost, int prodYear, String name, String country) {
-    if (cost > 0 &&
+  public Furniture(float price, int prodYear, String name, String country) {
+    if (price > 0 &&
         prodYear > 0 &&
         prodYear < 2023 &&
         (name != null) &&
         (country != null)) {
-      this.cost = cost;
+      this.price = price;
       this.prodYear = prodYear;
       this.country = country;
       this.name = name;
@@ -25,18 +26,18 @@ public class Furniture {
     }
   }
 
-  public Furniture(){
+  public Furniture() {
     this.country = "Неизвестна";
     this.name = "Без названия";
   }
 
-  public float getCost() {
-    return cost;
+  public float getPrice() {
+    return price;
   }
 
-  public void setCost(float cost) {
-    if (cost > 0) {
-      this.cost = cost;
+  public void setPrice(float price) {
+    if (price > 0) {
+      this.price = price;
     }
   }
 
@@ -71,17 +72,23 @@ public class Furniture {
     }
   }
 
-  public float getMonthlyPayment(){
-    return (cost * 1.15f) / 12;
+  public float getMonthlyPayment() {
+    return (price * 1.15f) / 12;
   }
 
   @Override
   public String toString() {
     return String.format("""
-        %s
-        Цена: %f
-        Производитель: %s
-        Год производства %d
-        """, name, cost, country, prodYear);
+            %s
+            Цена: %s
+            Страна производитель: %s
+            Год производства %d
+            Месячная оплата при рассрочке на год: %s
+            """,
+        name,
+        decimalFormat.format(price),
+        country,
+        prodYear,
+        decimalFormat.format(getMonthlyPayment()));
   }
 }
