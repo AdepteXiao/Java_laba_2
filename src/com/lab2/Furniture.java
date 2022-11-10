@@ -29,6 +29,16 @@ public class Furniture {
   private String country;
 
   /**
+   * Конструктор создающий пустой экземпляр класса
+   */
+  public Furniture() {
+    this.country = "Неизвестна";
+    this.name = "Без названия";
+    this.prodYear = 0;
+    this.price = 0;
+  }
+
+  /**
    * Конструктор создающий заполненный экземпляр класса
    *
    * @param price    Цена мебели
@@ -50,14 +60,6 @@ public class Furniture {
       this.country = "Неизвестна";
       this.name = "Без названия";
     }
-  }
-
-  /**
-   * Конструктор создающий пустой экземпляр класса
-   */
-  public Furniture() {
-    this.country = "Неизвестна";
-    this.name = "Без названия";
   }
 
   /**
@@ -142,14 +144,14 @@ public class Furniture {
   }
 
   /**
-   * Метод получения месячной оплаты при взятии мебели в рассрочку
-   * под 5% годовых на 12 месяцев
+   * Метод получения месячной оплаты при взятии мебели в рассрочку под 5% годовых на 12 месяцев
    *
-   * @return месячная оплата при взятии мебели в рассрочку
-   * под 5% годовых на 12 месяцев
+   * @return месячная оплата при взятии мебели в рассрочку под 5% годовых на 12 месяцев
    */
   public float getMonthlyPayment() {
-    return (price * 1.15f) / 12;
+    final float MONTHLY_PAYMENT = 1.05f;
+    final int MONTHS = 12;
+    return (price * MONTHLY_PAYMENT) / MONTHS;
   }
 
   /**
